@@ -1,4 +1,4 @@
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/cart";
 import CartItem from "~/components/CartItem";
 import CartSummary from "~/components/CartSummary";
 
@@ -13,8 +13,8 @@ export default function Cart() {
 	return (
 		<>
 		<div>
-			<CartItem />
-			<CartSummary />
+			<CartItem/>
+			<CartSummary/>
 		</div>
 		
 		</>

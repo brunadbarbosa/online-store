@@ -1,6 +1,6 @@
 import { Trash } from "lucide-react";
 
-export default function CartProduct() {
+export default function CartItem() {
 	return (
 		<>
 		<div>
@@ -11,7 +11,7 @@ export default function CartProduct() {
 			</div>
 			<div>
 				<p>- 1 +</p>
-				<Trash></Trash>
+				<Trash/>
 			</div>
 		</div>
 		</>

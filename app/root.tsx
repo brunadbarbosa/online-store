@@ -19,7 +19,11 @@ export const links: Route.LinksFunction = () => [
     crossOrigin: "anonymous",
   },
   { rel: "icon", 
-	href: "public/favicon.ico" 
+	href: "/favicon.ico" 
+  },
+{
+	rel: "stylesheet", 
+	href:"https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
   },
   {
     rel: "stylesheet",

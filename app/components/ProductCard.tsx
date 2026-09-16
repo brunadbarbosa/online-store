@@ -1,12 +1,15 @@
-export default function ProductCard() {
+import { Link } from "react-router";
+import type { Product } from "~/server/apiServer";
+
+export default function ProductCard( { product }: { product: Product }) {
    return (
  	<>
-	<div>
-		<img src="" alt="" />
+	<Link to={`/products/${product.id}`} >
+		<img src={product.thumbnail} alt={product.title} />
 		<div>
-			<p>Product Name</p>
-			<p>$99.99</p>
+			<p>{product.title}</p>
+			<p>${product.price}</p>
 		</div>
-	</div>
+	</Link>
  	</> );
 }

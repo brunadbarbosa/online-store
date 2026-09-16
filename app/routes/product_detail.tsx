@@ -1,27 +1,35 @@
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/product_detail";
+import { getProduct } from "~/server/apiServer";
 
-export function meta({}: Route.MetaArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
+	const product = await getProduct(params.productId);
+	return { product };
+}
+
+export function meta({ loaderData }: Route.MetaArgs) {
+	const { product } = loaderData;
   return [
-	{ title: "The Online Store" },
-	{ name: "description", content: "Welcome to my Online Store!" },
+	{ title: `${product.title}` },
+	{ name: "description", content: "Product detail" },
   ];
 }
 
-export default function ProductDetail() {
+export default function ProductDetail({ loaderData }: Route.ComponentProps) {
+	const { product } = loaderData;
 	return (
 		<>
 			<div>
-				<img src="" alt="" />
+				<img src={product.thumbnail} alt={product.title} />
 			</div>
 			<div>
 				<div>
-					<h2>Product Title</h2>
-					<h3>Product Price</h3>
+					<h2>{product.title}</h2>
+					<h3>${product.price}</h3>
 					<button>Add to Cart</button>
 				</div>
 				<div>
 					<p>Product Details</p>
-					<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos asperiores aut, vitae impedit, porro pariatur omnis similique quis ad fugit atque, error nihil cumque! Dignissimos at maxime quos deleniti labore?</p>
+					<p>{product.description}</p>
 				</div>
 			</div>
 		</>

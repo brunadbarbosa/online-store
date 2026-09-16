@@ -6,8 +6,9 @@ import { User } from "lucide-react";
 
 export default function NavBar() {
   return (
-	<>	<nav>
-		<h1>The Online Shop</h1>
+	<>	
+	<nav className="flex items-center flex-row space-between items-stretch">
+		<h1 className="font-heading text-[32px] font-normal">The Online Shop</h1>
 		<div>
 			<Link to="/">Home</Link>
 			<Link to="/">Shop</Link>
@@ -16,13 +17,14 @@ export default function NavBar() {
 			<Link to="/">Blog</Link>
 		</div>
 		<div>
-			<Search></Search>
-			<User></User>
-			<ShoppingBag></ShoppingBag>
+			<Search/>
+			<User/>
+			<Link to="/cart"><ShoppingBag/></Link>
 		</div>
 
 	</nav>
-	</> );
+	</> 
+	);
 }
 	
 	
