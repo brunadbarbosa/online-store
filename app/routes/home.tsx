@@ -1,8 +1,12 @@
 import type { Route } from "./+types/home";
-import { Link } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import ProductCard from "~/components/ProductCard";
-import { getProducts } from "~/server/apiServer";
+import SortBy from "~/components/SortBy";
+import Categories from "~/components/Categories";
+import Pagination from "~/components/Pagination";
+import { getProducts, getCategories } from "~/server/apiServer";
+import { use } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,10 +18,17 @@ export function meta({}: Route.MetaArgs) {
 export async function loader({ request } : Route.LoaderArgs) {
 	const url = new URL(request.url);
 	const page = Number(url.searchParams.get("page") ?? "1");
+	const sortBy = url.searchParams.get("sortBy") ?? undefined;
+	const order = (url.searchParams.get("order") as "asc" | "desc") ?? undefined;
+	const selectedCategories = url.searchParams.getAll("category");
 	const limit = 9;
 	const skip = (page - 1) * limit;
-	const info = await getProducts(limit, skip);
-	return { products: info.products, total: info.total, page, limit };
+
+	const [info, categories] =await Promise.all([
+		getProducts(limit, skip, sortBy, order, selectedCategories),
+		getCategories()
+	]);
+	return { products: info.products, total: info.total, page, limit, sortBy, order, categories };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
@@ -25,16 +36,20 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 	const totalPages = Math.ceil(total / limit);
 	const start = (page - 1) * limit + 1;
 	const end = Math.min(page * limit, total);
+	const [searchParams] = useSearchParams();
+
+	function pageLink(n: number) {
+		const next = new URLSearchParams(searchParams);
+		next.set("page", String(n));
+		return `?${next}`;
+	}
 
 	return (
 	<>
-	<div className="flex flex-row gap-12 px-4 justify-center justify-items-start">
-		<div>
-				<div className="flex items-center flex-row justify-between	 basis-2/3">
-				<div className="flex items-center flex-row gap-4 border rounded-lg py-2 px-3">
-					<p className="text-[15px] color=[#1F3044]">Sort by</p>
-					<ChevronDown className="text-[15px]" />
-				</div>
+	<div className="flex flex-row gap-12 px-4">
+		<div className="basis-4/5 px-12">
+			<div className="flex items-center flex-row justify-between py-4">
+				<SortBy />
 				<div>
 					<p className="text-[15px]">Showing {start} - {end} of {total} </p>
 				</div>
@@ -46,24 +61,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 					</li>
 				))}
 			</ul>
-			<div>
-				{Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => ( 
-					<Link key={n} to={`?page=${n}`} > {n} </Link>))}
-				{page < totalPages && (
-					<Link to={`?page=${page + 1}`}> <ChevronRight/> </Link>
-				)}
+			<div className="flex flex-row-reverse">
+				<Pagination page={page} total={total} limit={limit}/>				
 			</div>
+
 		</div>
-		<div className="flex items-start flex-row justify-between	basis-1/3">
-			<div className="flex items-start flex-col gap-4">
-				<p>Categories</p>
-				<ul>
-					<li>Categorie 1</li>
-					<li>Categorie 2</li>
-					<li>Categorie 3</li>
-					<li>Categorie 4</li>
-				</ul>
-			</div>
+		<div className="flex items-start flex-row justify-between basis-1/5">
+			<Categories categories={loaderData.categories} />
 		</div>
 	</div>
 	</>
