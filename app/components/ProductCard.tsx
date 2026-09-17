@@ -4,11 +4,11 @@ import type { Product } from "~/server/apiServer";
 export default function ProductCard( { product }: { product: Product }) {
    return (
  	<>
-	<Link to={`/products/${product.id}`} >
-		<img src={product.thumbnail} alt={product.title} />
+	<Link className="block max-w-[336px] gap-4" to={`/products/${product.id}`} >
+		<img className="w-full h-full size-[336px]" src={product.thumbnail} alt={product.title} />
 		<div>
-			<p>{product.title}</p>
-			<p>${product.price}</p>
+			<p className="text-[15px]">{product.title}</p>
+			<p className="text-[15px]">${product.price.toFixed(2)}</p>
 		</div>
 	</Link>
  	</> );

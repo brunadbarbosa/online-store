@@ -28,36 +28,42 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
 	return (
 	<>
-	<div>
+	<div className="flex flex-row gap-12 px-4 justify-center justify-items-start">
 		<div>
-			<p>Sort by</p>
-			<ChevronDown />
-		</div>
-		<div>
-			<p>Showing {start} - {end} of {total} </p>
-		</div>
-	</div>
-	<ul>
-		{products.map((product) => (
-			<ProductCard key={product.id} product={product} />
-		))}
-	</ul>
-	<div>
-		{Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => ( 
-			<Link key={n} to={`?page=${n}`} > {n} </Link>))}
-		{page < totalPages && (
-			<Link to={`?page=${page + 1}`}> <ChevronRight/> </Link>
-		)}
-	</div>
-	<div>
-		<div>
-			<p>Categories</p>
-			<ul>
-				<li>Categorie 1</li>
-				<li>Categorie 2</li>
-				<li>Categorie 3</li>
-				<li>Categorie 4</li>
+				<div className="flex items-center flex-row justify-between	 basis-2/3">
+				<div className="flex items-center flex-row gap-4 border rounded-lg py-2 px-3">
+					<p className="text-[15px] color=[#1F3044]">Sort by</p>
+					<ChevronDown className="text-[15px]" />
+				</div>
+				<div>
+					<p className="text-[15px]">Showing {start} - {end} of {total} </p>
+				</div>
+			</div>
+			<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+				{products.map((product) => (
+					<li key={product.id} className="w-full h-full">
+						<ProductCard product={product} />
+					</li>
+				))}
 			</ul>
+			<div>
+				{Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => ( 
+					<Link key={n} to={`?page=${n}`} > {n} </Link>))}
+				{page < totalPages && (
+					<Link to={`?page=${page + 1}`}> <ChevronRight/> </Link>
+				)}
+			</div>
+		</div>
+		<div className="flex items-start flex-row justify-between	basis-1/3">
+			<div className="flex items-start flex-col gap-4">
+				<p>Categories</p>
+				<ul>
+					<li>Categorie 1</li>
+					<li>Categorie 2</li>
+					<li>Categorie 3</li>
+					<li>Categorie 4</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	</>
