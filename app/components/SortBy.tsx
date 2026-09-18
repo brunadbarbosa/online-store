@@ -24,7 +24,7 @@ export default function SortBy(){
 					next.set("sortBy", sortBy);
 					next.set("order", order);
 				}
-				next.delete("page"); // volta para a página 1 ao mudar o sort
+				next.delete("page");
 				navigate(`?${next}`);
 			}}
 		>

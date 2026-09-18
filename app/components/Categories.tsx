@@ -21,6 +21,22 @@ export default function Categories({ categories }: { categories: Category[] }) {
 		navigate(`?${next}`);
 	}
 
+	const checkboxList = (
+		<div className="flex flex-col gap-2 text-[15px]">
+			{categories.map((cat) => (
+				<label key={cat.slug} className="flex items-center gap-2">
+					<input
+						type="checkbox"
+						checked={activeCategories.includes(cat.slug)}
+						onChange={() => toggleCategory(cat.slug)}
+						className="accent-[#1F3044]"
+					/>
+					{cat.name}
+				</label>
+			))}
+		</div>
+	);
+
 	return (
 		<div className="flex items-start flex-col gap-4 p-4" >
 			<p className="text-[15px]">Categories</p>

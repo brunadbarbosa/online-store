@@ -20,7 +20,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
 	return (
 		<div className="flex flex-col items-start sm:flex-row md:flex-row">			
 			<div className="flex  items-center flex-col p-4 basis-4/5">
-				<img src={product.images[0]} alt={product.title} className="w-auto h-auto"/>
+				<img src={product.images[0]} alt={product.title} className="w-auto h-auto shadow-md rounded-lg"/>
 			</div>
 			<div className="flex flex-col content-start basis-2/5">
 				<div className="flex flex-col gap-4 p-4">
