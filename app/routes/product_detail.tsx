@@ -1,5 +1,6 @@
 import type { Route } from "./+types/product_detail";
 import { getProduct } from "~/server/apiServer";
+import { useCart } from "~/context/CartContext";
 
 export async function loader({ params }: Route.LoaderArgs) {
 	const product = await getProduct(params.productId);
@@ -16,6 +17,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
 
 export default function ProductDetail({ loaderData }: Route.ComponentProps) {
 	const { product } = loaderData;
+	const { addToCart } = useCart();
 
 	return (
 		<div className="flex flex-col items-start sm:flex-row md:flex-row">			
@@ -28,7 +30,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
 						<h2>{product.title}</h2>
 						<h3>${product.price}</h3>						
 					</div>
-					<button className="w-full bg-[#1f3044] text-white px- py-2 font-light font-[Roboto_Mono]">Add to Cart</button>
+					<button onClick={addToCart} className="w-full bg-[#1f3044] text-white px- py-2 font-light font-[Roboto_Mono]">Add to Cart</button>
 				</div>
 				<div className="flex flex-col gap-2 p-4">
 					<p>Product Details</p>

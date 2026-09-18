@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import NavBar from "./components/NavBar";
+import { CartProvider } from "./context/CartContext";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -60,9 +61,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
 	<>
-	<NavBar/>
-	<Outlet/> 
-	</> );
+	<CartProvider>
+		<NavBar/>
+		<Outlet/> 
+	</CartProvider>
+	</>
+	);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
