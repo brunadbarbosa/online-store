@@ -29,8 +29,8 @@ export default function SortBy(){
 			}}
 		>
 			<option value="">Sort by</option>
-			<option value="price-asc">Preço: ↑ </option>
-			<option value="price-desc">Preço: ↓ </option>
+			<option value="price-asc">Preço: ↓ </option>
+			<option value="price-desc">Preço: ↑ </option>
 			<option value="title-asc">Nome: A-Z</option>
 			<option value="title-desc">Nome: Z-A</option>
 		</select>

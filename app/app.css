@@ -4,7 +4,14 @@
 	--font-heading: "Bebas Neue", sans-serif;
 	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Ubuntu",
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Roboto Mono";
-	--colour-brand: #1F3044;
+	--animate-toast: toast 2s ease-in-out forwards;
+}
+
+@keyframes toast {
+	0%   { opacity: 0; transform: translateY(10px); }
+	10%  { opacity: 1; transform: translateY(0); }
+	90%  { opacity: 1; transform: translateY(0); }
+	100% { opacity: 0; transform: translateY(10px); }
 }
 
 body {
