@@ -46,7 +46,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
 	return (
 	<>
-	<div className="flex flex-row gap-12 px-4">
+	<div className="flex flex-col gap-12 px-4 sm:flex-row md:flex-row">
 		<div className="basis-4/5 px-12">
 			<div className="flex items-center flex-row justify-between py-4">
 				<SortBy />

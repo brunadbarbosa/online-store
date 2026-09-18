@@ -6,8 +6,8 @@ import { User } from "lucide-react";
 export default function NavBar() {
   return (
 	<>	
-	<nav className="px-7 py-1 m-2 flex items-center flex-row justify-between items-stretch border-b-1 border-black">
-		<h1 className="font-heading text-[32px] font-normal tracking-wide">The Online Shop</h1>
+	<nav className="flex px-7 py-1 m-2 flex items-center flex-row justify-between items-stretch border-b-1 border-black">
+		<h1 className="flex flex-nowrap font-heading text-[32px] font-normal tracking-wide">The Online Shop</h1>
 		<div className="flex items-center flex-row gap-13">
 			<Link className="gap-5 justify-items-start" to="/">Home</Link>
 			<Link className="gap-5 justify-items-start" to="/">Shop</Link>

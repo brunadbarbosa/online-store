@@ -18,7 +18,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
 	const { product } = loaderData;
 
 	return (
-		<div className="flex items-start">			
+		<div className="flex flex-col items-start sm:flex-row md:flex-row">			
 			<div className="flex  items-center flex-col p-4 basis-4/5">
 				<img src={product.images[0]} alt={product.title} className="w-auto h-auto"/>
 			</div>
